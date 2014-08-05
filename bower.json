@@ -1,0 +1,13 @@
+{
+	"name": "sivi",
+	"description": "A web application for creating Curriculum Vitae",
+	"version": "0.1",
+	"homepage": "https://github.com/woshilapin/sivi",
+	"license": "MIT",
+	"private": "true",
+	"dependencies": {
+		"angular": ">=1.2.22",
+		"jquery": ">=2.1.1",
+		"bootstrap": ">=3.2.0"
+	}
+}
