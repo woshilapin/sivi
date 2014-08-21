@@ -14,9 +14,13 @@ repository.
 Then install some NodeJS modules like `httpserver` and `node-static`.
 
     $ cd sivi
-    $ npm install httpserver node-static
+    $ npm install
+
+You should also run MongoDB.
+
+    $ mongod --dbpath /path/to/your/data
 
 Finally, you can run it.
 
-    $ node index.js
+    $ node start
 

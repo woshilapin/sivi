@@ -3,26 +3,31 @@
 	"description": "A web application to creates Curriculum Vitae",
 	"version": "0.0.1",
 	"license": "MIT",
-	"private": "true",
+	"private": true,
+	"scripts": {
+		"start": "node ./bin/www"
+	},
 	"author": {
-	  "name": "woshilapin",
-	  "email": "woshilapin@gmail.com"
+		"name": "woshilapin",
+		"email": "woshilapin@gmail.com"
 	},
 	"repository": {
-	  "type": "git",
-	  "url": "https://github.com/woshilapin/sivi"
+		"type": "git",
+		"url": "https://github.com/woshilapin/sivi"
 	},
 	"bugs": {
-	  "url": "https://github.com/woshilapin/sivi/issues"
+		"url": "https://github.com/woshilapin/sivi/issues"
 	},
 	"dependencies": {
-	  "bower": ">=1.3.8",
-	  "express": "3.x"
-	},
-	"scripts": {
-		"postinstall": "bower install",
-		"prestart": "npm install",
-		"start": "http-server -a 0.0.0.0 -p 8888"
-	},
-	"main": "lib/index.js"
+		"bower": ">=1.3.8",
+		"express": "~4.2.0",
+		"static-favicon": "~1.0.0",
+		"morgan": "~1.0.0",
+		"cookie-parser": "~1.0.1",
+		"body-parser": "~1.0.0",
+		"debug": "~0.7.4",
+		"jade": "~1.3.0",
+		"mongodb": "1.4.x",
+		"mongoskin": "1.4.x"
+	}
 }
