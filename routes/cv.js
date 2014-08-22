@@ -5,7 +5,11 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	var db = req.db;
 	db.collection('cv').find().toArray(function(err, items) {
-		res.json(items);
+		if(err === null) {
+			res.status(200).json(items);
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
@@ -15,7 +19,11 @@ router.get('/:email', function(req, res) {
 		"email": req.params.email
 	};
 	db.collection('cv').find({"$query": query}).toArray(function(err, items) {
-		res.json(items);
+		if(err === null) {
+			res.status(200).json(items);
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
@@ -23,9 +31,11 @@ router.post('/:email', function(req, res) {
 	var db = req.db;
 	req.body._date = new Date();
 	db.collection('cv').insert(req.body, function(err, result) {
-		res.send(
-			(err === null) ? { msg: '' } : { msg: err }
-		);
+		if(err === null) {
+			res.status(201).send({"msg": ""});
+		} else {
+			res.status(403).send({"msg": err});
+		}
 	});
 });
 
@@ -35,9 +45,11 @@ router.delete('/:email', function(req, res) {
 		"email": req.params.email
 	};
 	db.collection('cv').remove(query, function(err, result) {
-		res.send(
-			(result === 1) ? { msg: '' } : { msg: err }
-		);
+		if(result === 1) {
+			res.status(204).send({"msg": ""});
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
@@ -49,7 +61,11 @@ router.get('/:email/last', function(req, res) {
 	};
 	var orderby = {"_date": -1};
 	db.collection('cv').findOne({"$query": query, "$orderby": orderby}, function(err, result) {
-		res.json(result);
+		if(err === null) {
+			res.status(200).json(result);
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
@@ -60,7 +76,11 @@ router.get('/:email/:id', function(req, res) {
 		"email": req.params.email
 	};
 	db.collection('cv').findOne({"$query": query}, function(err, result) {
-		res.json(result);
+		if(err === null) {
+			res.status(200).json(result);
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
@@ -72,9 +92,11 @@ router.put('/:email/:id', function(req, res) {
 	};
 	req.body._date = new Date();
 	db.collection('cv').update(query, req.body, function(err, result) {
-		res.send(
-			(err === null) ? { msg: '' } : { msg: err }
-		);
+		if(err === null) {
+			res.status(204).send({"msg": ""});
+		} else {
+			res.status(403).send({"msg": err});
+		}
 	});
 });
 
@@ -85,9 +107,11 @@ router.delete('/:email/:id', function(req, res) {
 		"email": req.params.email
 	};
 	db.collection('cv').remove(query, function(err, result) {
-		res.send(
-			(result === 1) ? { msg: '' } : { msg:'error: ' + err }
-		);
+		if(result === 1) {
+			res.status(204).send({"msg": ""});
+		} else {
+			res.status(404).send({"msg": err});
+		}
 	});
 });
 
