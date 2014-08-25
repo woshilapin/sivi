@@ -61,7 +61,7 @@ router.get('/:email/last', function(req, res) {
 	};
 	var orderby = {"_date": -1};
 	db.collection('cv').findOne({"$query": query, "$orderby": orderby}, function(err, result) {
-		if(err === null) {
+		if(err === null && result != null) {
 			res.status(200).json(result);
 		} else {
 			res.status(404).send({"msg": err});
