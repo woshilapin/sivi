@@ -22,6 +22,6 @@ You should also run MongoDB.
 
 Finally, you can run it.
 
-    $ node start
+    $ npm start
 
-Your web application is now accessible on http://localhost:3000/.
+Your web application is now accessible on http://127.0.0.1:3000/.
