@@ -8,7 +8,7 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 				"postal": /^[0-9A-Z -]+$/
 			}
 		};
-		$scope.trigger = function() {
+		$scope.checkCV = function() {
 			var email = $scope.email;
 			if(email !== "") {
 				var uri = 'cv/' + email + '/last';
@@ -25,7 +25,6 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 				});
 			}
 		};
-		$scope.trigger();
 }]);
 cvApp.directive('myDate', ['dateFilter', function(dateFilter) {
 	return {
