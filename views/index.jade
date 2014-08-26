@@ -15,6 +15,10 @@ block content
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='cvForm.stepProfileEmail.$valid?"fa-check":"fa-warning"')
 								span#cv-form-step-profile-email-help.help-block(data-ng-show='cvForm.stepProfileEmail.$invalid')= 'You email address is invalid.'
+						.form-group
+							.col-xs-12.col-md-12.text-right(data-ng-show="isCV")
+								span#cv-form-step-profile-load-help.text-right.help-block= 'There is a CV in the database corresponding to this email.  Do you want to load it?'
+								button#cv-form-step-profile-load.btn.btn-primary(data-ng-click="loadCV()")= 'Load CV'
 						h1= 'Fill your personal profile'
 						.form-group
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-firstname')= 'First name'
