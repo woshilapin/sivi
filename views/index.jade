@@ -11,23 +11,23 @@ block content
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-email')= 'Email'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='your.name@mail.com',data-ng-model='email',data-ng-pattern='check.email',data-ng-change='trigger()',required)
+									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='ex: your.name@mail.com',data-ng-model='email',data-ng-pattern='check.email',data-ng-change="trigger()",required)
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='cvForm.stepProfileEmail.$valid?"fa-check":"fa-warning"')
 								span#cv-form-step-profile-email-help.help-block(data-ng-show='cvForm.stepProfileEmail.$invalid')= 'You email address is invalid.'
 						.form-group
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-firstname')= 'First name'
 							.col-xs-12.col-md-10
-								input#cv-form-step-profile-firstname.form-control(type='text',name='cv-form-step-profile-firstname',placeholder='John',data-ng-model='cv.firstname',required)
+								input#cv-form-step-profile-firstname.form-control(type='text',name='cv-form-step-profile-firstname',placeholder='ex: John',data-ng-model='cv.firstname',required)
 						.form-group
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-lastname')= 'Last name'
 							.col-xs-12.col-md-10
-								input#cv-form-step-profile-lastname.form-control(type='text',name='cv-form-step-profile-lastname',placeholder='SMITH',data-ng-model='cv.lastname',required)
+								input#cv-form-step-profile-lastname.form-control(type='text',name='cv-form-step-profile-lastname',placeholder='ex: SMITH',data-ng-model='cv.lastname',required)
 						.form-group(data-ng-class='cvForm.stepProfileBirthday.$valid?"has-success":"has-error"')
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-birthday')= 'Birthday'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-profile-birthday.form-control(type='date',name='stepProfileBirthday',placeholder='1970-01-01',data-ng-model='cv.birthday',required,data-my-date)
+									input#cv-form-step-profile-birthday.form-control(type='date',name='stepProfileBirthday',placeholder='ex: 1970-01-01',data-ng-model='cv.birthday',required,data-my-date)
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='cvForm.stepProfileBirthday.$valid?"fa-check":"fa-times"')
 								span#cv-form-step-profile-birthday-help.help-block(data-ng-show='cvForm.stepProfileBirthday.$invalid')= 'You birthday date should be in the format yyyy-mm-dd.'
@@ -36,16 +36,16 @@ block content
 						.form-group
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-street')= 'Street'
 							.col-xs-12.col-md-10
-								input#cv-form-step-address-street.form-control(type='text',name='stepAddressStreet',placeholder='42 avenue des Champs-Élysées',data-ng-model='cv.address.street')
+								input#cv-form-step-address-street.form-control(type='text',name='stepAddressStreet',placeholder='ex: 42 avenue des Champs-Élysées',data-ng-model='cv.address.street')
 						.form-group(data-ng-class='cvForm.stepAddressPostal.$valid?"has-success":"has-error"')
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-postal')= 'Postal code'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-address-postal.form-control(type='text',name='stepAddressPostal',placeholder='75000',data-ng-model='cv.address.postal',data-ng-pattern='check.address.postal')
+									input#cv-form-step-address-postal.form-control(type='text',name='stepAddressPostal',placeholder='ex: 75000',data-ng-model='cv.address.postal',data-ng-pattern='check.address.postal')
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='cvForm.stepAddressPostal.$valid?"fa-check":"fa-times"')
 								span#cv-form-step-address-postal-help.help-block(data-ng-show='cvForm.stepAddressPostal.$invalid')= 'Your postal code should only contains alphanumerics characters (upper case), space or dash [A-Z0-9 -].'
 						.form-group
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-city')= 'City'
 							.col-xs-12.col-md-10
-								input#cv-form-step-address-city.form-control(type='text',name='stepAddressCity',placeholder='Paris',data-ng-model='cv.address.city')
+								input#cv-form-step-address-city.form-control(type='text',name='stepAddressCity',placeholder='ex: Paris',data-ng-model='cv.address.city')
