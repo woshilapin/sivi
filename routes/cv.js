@@ -8,7 +8,8 @@ router.get('/', function(req, res) {
 		if(err === null) {
 			res.status(200).json(items);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
@@ -16,13 +17,16 @@ router.get('/', function(req, res) {
 router.get('/:email', function(req, res) {
 	var db = req.db;
 	var query = {
-		"email": req.params.email
+		$query: {
+			email: req.params.email
+		}
 	};
-	db.collection('cv').find({"$query": query}).toArray(function(err, items) {
+	db.collection('cv').find(query).toArray(function(err, items) {
 		if(err === null) {
 			res.status(200).json(items);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
@@ -32,9 +36,11 @@ router.post('/:email', function(req, res) {
 	req.body._date = new Date();
 	db.collection('cv').insert(req.body, function(err, result) {
 		if(err === null) {
-			res.status(201).send({"msg": ""});
+			var message = {msg: ""};
+			res.status(201).send(message);
 		} else {
-			res.status(403).send({"msg": err});
+			var message = {msg: err};
+			res.status(403).send(message);
 		}
 	});
 });
@@ -42,13 +48,15 @@ router.post('/:email', function(req, res) {
 router.delete('/:email', function(req, res) {
 	var db = req.db;
 	var query = {
-		"email": req.params.email
+		email: req.params.email
 	};
 	db.collection('cv').remove(query, function(err, result) {
 		if(result === 1) {
-			res.status(204).send({"msg": ""});
+			var message = {msg: ""};
+			res.status(204).send(message);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(403).send(message);
 		}
 	});
 });
@@ -57,14 +65,19 @@ router.delete('/:email', function(req, res) {
 router.get('/:email/last', function(req, res) {
 	var db = req.db;
 	var query = {
-		"email": req.params.email
+		$query: {
+			email: req.params.email
+		},
+		$orderby: {
+			_date: -1
+		}
 	};
-	var orderby = {"_date": -1};
-	db.collection('cv').findOne({"$query": query, "$orderby": orderby}, function(err, result) {
+	db.collection('cv').findOne(query, function(err, result) {
 		if(err === null && result != null) {
 			res.status(200).json(result);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
@@ -72,14 +85,17 @@ router.get('/:email/last', function(req, res) {
 router.get('/:email/:id', function(req, res) {
 	var db = req.db;
 	var query = {
-		"_id": mongo.helper.toObjectID(req.params.id),
-		"email": req.params.email
+		$query: {
+			_id: mongo.helper.toObjectID(req.params.id),
+			email: req.params.email
+		}
 	};
-	db.collection('cv').findOne({"$query": query}, function(err, result) {
+	db.collection('cv').findOne(query, function(err, result) {
 		if(err === null) {
 			res.status(200).json(result);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
@@ -87,15 +103,17 @@ router.get('/:email/:id', function(req, res) {
 router.put('/:email/:id', function(req, res) {
 	var db = req.db;
 	var query = {
-		"_id": mongo.helper.toObjectID(req.params.id),
-		"email": req.params.email
+		_id: mongo.helper.toObjectID(req.params.id),
+		email: req.params.email
 	};
 	req.body._date = new Date();
 	db.collection('cv').update(query, req.body, function(err, result) {
 		if(err === null) {
-			res.status(204).send({"msg": ""});
+			var message = {msg: ""};
+			res.status(204).send(message);
 		} else {
-			res.status(403).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
@@ -103,14 +121,16 @@ router.put('/:email/:id', function(req, res) {
 router.delete('/:email/:id', function(req, res) {
 	var db = req.db;
 	var query = {
-		"_id": mongo.helper.toObjectID(req.params.id),
-		"email": req.params.email
+		_id: mongo.helper.toObjectID(req.params.id),
+		email: req.params.email
 	};
 	db.collection('cv').remove(query, function(err, result) {
 		if(result === 1) {
-			res.status(204).send({"msg": ""});
+			var message = {msg: ""};
+			res.status(204).send(message);
 		} else {
-			res.status(404).send({"msg": err});
+			var message = {msg: err};
+			res.status(404).send(message);
 		}
 	});
 });
