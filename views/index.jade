@@ -7,50 +7,66 @@ block content
 				#cv-form-steps
 					#cv-form-step-profile
 						h1= 'Account'
-						.form-group(data-ng-class='cvForm.stepProfileEmail.$valid?"has-success":"has-warning"')
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-email')= 'Email'
+						.form-group(data-ng-class='(cvForm.stepProfileEmail.$valid||cvForm.stepProfileEmail.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepProfileEmail')= 'Email'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='ex: your.name@mail.com',data-ng-model='email',data-ng-change="checkCV()",required)
+									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='ex: your.name@mail.com',data-ng-model='email',data-ng-change='checkCV()',required)
 									.input-group-addon
-										i.fa.fa-fw(data-ng-class='cvForm.stepProfileEmail.$valid?"fa-check":"fa-warning"')
-								span#cv-form-step-profile-email-help.help-block(data-ng-show='cvForm.stepProfileEmail.$invalid')= 'You email address is invalid.'
+										i.fa.fa-fw(data-ng-class='(cvForm.stepProfileEmail.$valid||cvForm.stepProfileEmail.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-profile-email-help.help-block(data-ng-hide='cvForm.stepProfileEmail.$valid||cvForm.stepProfileEmail.$pristine')= 'You email address is invalid.'
 						.form-group
-							.col-xs-12.col-md-12.text-right(data-ng-show="isCV")
+							.col-xs-12.col-md-12.text-right(data-ng-show='isCV')
 								span#cv-form-step-profile-load-help.text-right.help-block= 'There is a CV in the database corresponding to this email.  Do you want to load it?'
-								button#cv-form-step-profile-load.btn.btn-primary(data-ng-click="loadCV()")= 'Load CV'
+								button#cv-form-step-profile-load.btn.btn-primary(data-ng-click='loadCV()')= 'Load CV'
 						h1= 'Fill your personal profile'
-						.form-group
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-firstname')= 'First name'
+						.form-group(data-ng-class='(cvForm.stepProfileFirstname.$valid||cvForm.stepProfileFirstname.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepProfileFirstname')= 'First name'
 							.col-xs-12.col-md-10
-								input#cv-form-step-profile-firstname.form-control(type='text',name='cv-form-step-profile-firstname',placeholder='ex: John',data-ng-model='cv.firstname',required)
-						.form-group
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-lastname')= 'Last name'
+								.input-group
+									input#cv-form-step-profile-firstname.form-control(type='text',name='stepProfileFirstname',placeholder='ex: John',data-ng-model='cv.firstname',required)
+									.input-group-addon
+										i.fa.fa-fw(data-ng-class='(cvForm.stepProfileFirstname.$valid||cvForm.stepProfileFirstname.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-profile-firstname-help.help-block(data-ng-hide='cvForm.stepProfileFirstname.$valid||cvForm.stepProfileFirstname.$pristine')= 'You must fill your firstname.'
+						.form-group(data-ng-class='(cvForm.stepProfileLastname.$valid||cvForm.stepProfileLastname.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepProfileLastname')= 'Last name'
 							.col-xs-12.col-md-10
-								input#cv-form-step-profile-lastname.form-control(type='text',name='cv-form-step-profile-lastname',placeholder='ex: SMITH',data-ng-model='cv.lastname',required)
-						.form-group(data-ng-class='cvForm.stepProfileBirthday.$valid?"has-success":"has-error"')
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-birthday')= 'Birthday'
+								.input-group
+									input#cv-form-step-profile-lastname.form-control(type='text',name='stepProfileLastname',placeholder='ex: SMITH',data-ng-model='cv.lastname',required)
+									.input-group-addon
+										i.fa.fa-fw(data-ng-class='(cvForm.stepProfileLastname.$valid||cvForm.stepProfileLastname.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-profile-firstname-help.help-block(data-ng-hide='cvForm.stepProfileLastname.$valid||cvForm.stepProfileLastname.$pristine')= 'You must fill your lastname.'
+						.form-group(data-ng-class='(cvForm.stepProfileBirthday.$valid||cvForm.stepProfileBirthday.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepProfileBirthday')= 'Birthday'
 							.col-xs-12.col-md-10
 								.input-group
 									input#cv-form-step-profile-birthday.form-control(type='date',name='stepProfileBirthday',placeholder='ex: 1970-01-01',data-ng-model='cv.birthday',required,data-my-date)
 									.input-group-addon
-										i.fa.fa-fw(data-ng-class='cvForm.stepProfileBirthday.$valid?"fa-check":"fa-times"')
-								span#cv-form-step-profile-birthday-help.help-block(data-ng-show='cvForm.stepProfileBirthday.$invalid')= 'You birthday date should be in the format yyyy-mm-dd.'
+										i.fa.fa-fw(data-ng-class='(cvForm.stepProfileBirthday.$valid||cvForm.stepProfileBirthday.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-profile-birthday-help.help-block(data-ng-hide='cvForm.stepProfileBirthday.$valid||cvForm.stepProfileBirthday.$pristine')= 'You birthday date should be in the format yyyy-mm-dd.'
 					#cv-form-step-address
 						h1= 'Fill your address'
-						.form-group
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-street')= 'Street'
-							.col-xs-12.col-md-10
-								input#cv-form-step-address-street.form-control(type='text',name='stepAddressStreet',placeholder='ex: 42 avenue des Champs-Élysées',data-ng-model='cv.address.street')
-						.form-group(data-ng-class='cvForm.stepAddressPostal.$valid?"has-success":"has-error"')
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-postal')= 'Postal code'
+						.form-group(data-ng-class='(cvForm.stepAddressStreet.$valid||cvForm.stepAddressStreet.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepAddressStreet')= 'Street'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-address-postal.form-control(type='text',name='stepAddressPostal',placeholder='ex: 75000',data-ng-model='cv.address.postal',data-ng-pattern='check.address.postal')
+									input#cv-form-step-address-street.form-control(type='text',name='stepAddressStreet',placeholder='ex: 42 avenue des Champs-Élysées',data-ng-model='cv.address.street',required)
 									.input-group-addon
-										i.fa.fa-fw(data-ng-class='cvForm.stepAddressPostal.$valid?"fa-check":"fa-times"')
-								span#cv-form-step-address-postal-help.help-block(data-ng-show='cvForm.stepAddressPostal.$invalid')= 'Your postal code should only contains alphanumerics characters (upper case), space or dash [A-Z0-9 -].'
-						.form-group
-							label.control-label.col-xs-12.col-md-2(for='cv-form-step-address-city')= 'City'
+										i.fa.fa-fw(data-ng-class='(cvForm.stepAddressStreet.$valid||cvForm.stepAddressStreet.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-profile-birthday-help.help-block(data-ng-hide='cvForm.stepAddressStreet.$valid||cvForm.stepAddressStreet.$pristine')= 'You must fill your address.'
+						.form-group(data-ng-class='(cvForm.stepAddressPostal.$valid||cvForm.stepAddressPostal.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepAddressPostal')= 'Postal code'
 							.col-xs-12.col-md-10
-								input#cv-form-step-address-city.form-control(type='text',name='stepAddressCity',placeholder='ex: Paris',data-ng-model='cv.address.city')
+								.input-group
+									input#cv-form-step-address-postal.form-control(type='text',name='stepAddressPostal',placeholder='ex: 75000',data-ng-model='cv.address.postal',data-ng-pattern='check.address.postal',required)
+									.input-group-addon
+										i.fa.fa-fw(data-ng-class='(cvForm.stepAddressPostal.$valid||cvForm.stepAddressPostal.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-address-postal-help.help-block(data-ng-hide='cvForm.stepAddressPostal.$valid||cvForm.stepAddressPostal.$pristine')= 'Your postal code should contains alphanumerics characters (upper case), space or dash [A-Z0-9 -].'
+						.form-group(data-ng-class='(cvForm.stepAddressCity.$valid||cvForm.stepAddressCity.$pristine)?"has-success":"has-warning"')
+							label.control-label.col-xs-12.col-md-2(for='stepAddressCity')= 'City'
+							.col-xs-12.col-md-10
+								.input-group
+									input#cv-form-step-address-city.form-control(type='text',name='stepAddressCity',placeholder='ex: Paris',data-ng-model='cv.address.city',required)
+									.input-group-addon
+										i.fa.fa-fw(data-ng-class='(cvForm.stepAddressCity.$valid||cvForm.stepAddressCity.$pristine)?"fa-check":"fa-warning"')
+								span#cv-form-step-address-postal-help.help-block(data-ng-hide='cvForm.stepAddressCity.$valid||cvForm.stepAddressCity.$pristine')= 'You must fill your city.'

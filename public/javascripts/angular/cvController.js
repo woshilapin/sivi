@@ -2,7 +2,6 @@ var cvApp = angular.module('cvApp', []);
 
 cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 		var cv = undefined;
-		$scope.email= "simard.jean@gmail.com";
 		$scope.check = {
 			"address": {
 				"postal": /^[0-9A-Z -]+$/
