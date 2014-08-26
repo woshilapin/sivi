@@ -11,7 +11,7 @@ block content
 							label.control-label.col-xs-12.col-md-2(for='cv-form-step-profile-email')= 'Email'
 							.col-xs-12.col-md-10
 								.input-group
-									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='ex: your.name@mail.com',data-ng-model='email',data-ng-pattern='check.email',data-ng-change="checkCV()",required)
+									input#cv-form-step-profile-email.form-control(type='email',name='stepProfileEmail',placeholder='ex: your.name@mail.com',data-ng-model='email',data-ng-change="checkCV()",required)
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='cvForm.stepProfileEmail.$valid?"fa-check":"fa-warning"')
 								span#cv-form-step-profile-email-help.help-block(data-ng-show='cvForm.stepProfileEmail.$invalid')= 'You email address is invalid.'
