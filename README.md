@@ -24,3 +24,4 @@ Finally, you can run it.
 
     $ node start
 
+Your web application is now accessible on http://localhost:3000/.
