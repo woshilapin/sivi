@@ -70,3 +70,14 @@ block content
 									.input-group-addon
 										i.fa.fa-fw(data-ng-class='(cvForm.stepAddressCity.$valid||cvForm.stepAddressCity.$pristine)?"fa-check":"fa-warning"')
 								span#cv-form-step-address-postal-help.help-block(data-ng-hide='cvForm.stepAddressCity.$valid||cvForm.stepAddressCity.$pristine')= 'You must fill your city.'
+					#cv-form-step-diplomas
+						h1= 'Fill your diplomas'
+						table#cv-form-step-diplomas-table.table.table-striped
+							thead
+								tr
+									th.col-sm-2= 'Year'
+									th.col-sm-8= 'Diploma'
+							tbody
+								tr(data-ng-repeat='diploma in cv.diplomas')
+									td= '{{diploma.year}}'
+									td= '{{diploma.name}}'
