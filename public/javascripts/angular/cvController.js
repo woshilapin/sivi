@@ -48,6 +48,21 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 				});
 			}
 		};
+		$scope.addDiploma = function(year, name, next) {
+			$scope.cv.diplomas.push({
+					name: name,
+					year: year
+			});
+			callback(next);
+		};
+		$scope.removeDiploma = function(index, next) {
+			console.log($scope.cv.diplomas);
+			console.log($scope.cv.diplomas.length);
+			$scope.cv.diplomas.splice(index, 1);
+			console.log($scope.cv.diplomas);
+			console.log($scope.cv.diplomas.length);
+			callback(next);
+		};
 }]);
 cvApp.directive('myDate', ['dateFilter', function(dateFilter) {
 	return {

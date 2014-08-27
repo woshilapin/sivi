@@ -75,9 +75,25 @@ block content
 						table#cv-form-step-diplomas-table.table.table-striped
 							thead
 								tr
-									th.col-sm-2= 'Year'
-									th.col-sm-8= 'Diploma'
+									th.col-md-2= 'Year'
+									th.col-md-7= 'Diploma'
+									th.col-md-1= ''
 							tbody
 								tr(data-ng-repeat='diploma in cv.diplomas')
 									td= '{{diploma.year}}'
 									td= '{{diploma.name}}'
+									td
+										.btn-group
+											button.fa.fa-fw.fa-minus.btn.btn-danger(data-ng-click='removeDiploma($index)')
+											button.fa.fa-fw.fa-plus.btn.btn-success(disabled)
+								tr
+									td
+										.input-group.col-md-12
+											input.form-control(type='number',name='stepDiplomaYear',data-ng-model='tmp.diploma.year')
+									td
+										.input-group.col-md-12
+											input.form-control(type='text',name='stepDiplomaName',data-ng-model='tmp.diploma.name')
+									td
+										.btn-group.text-center
+											button.fa.fa-fw.fa-minus.btn.btn-danger(disabled)
+											button.fa.fa-fw.fa-plus.btn.btn-success(data-ng-click='addDiploma(tmp.diploma.year,tmp.diploma.name)')
