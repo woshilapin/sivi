@@ -29,12 +29,14 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 				});
 			}
 		};
-		$scope.loadCV = function() {
+		$scope.loadCV = function(next) {
 			if($scope.isCV) {
 				$scope.cv = cv;
+				next();
 			} else {
 				$scope.checkCV(function() {
 					$scope.cv = cv;
+					next();
 				});
 			}
 		};
