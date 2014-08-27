@@ -8,7 +8,7 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 			}
 		};
 		$scope.isCV = false;
-		$scope.checkCV = function() {
+		$scope.checkCV = function(next) {
 			var email = $scope.email;
 			$scope.isCV = false;
 			if(email !== "") {
@@ -21,15 +21,21 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 						// Need to explicitly convert date into Date object in javascript
 						cv.birthday = new Date(data.birthday);
 					}
+					next();
 				}).
 				error(function(data, status, header, config) {
 					console.log('The database does not contain any CV for user \`' + email + "'");
+					next();
 				});
 			}
 		};
 		$scope.loadCV = function() {
-			if(cv) {
+			if($scope.isCV) {
 				$scope.cv = cv;
+			} else {
+				$scope.checkCV(function() {
+					$scope.cv = cv;
+				});
 			}
 		};
 }]);
