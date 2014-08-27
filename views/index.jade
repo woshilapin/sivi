@@ -89,11 +89,45 @@ block content
 								tr
 									td
 										.input-group.col-md-12
-											input.form-control(type='number',name='stepDiplomaYear',data-ng-model='tmp.diploma.year')
+											input.form-control(type='number',name='stepDiplomaYear',data-ng-model='tmp.diploma.year',placeholder='ex: 2010')
 									td
 										.input-group.col-md-12
-											input.form-control(type='text',name='stepDiplomaName',data-ng-model='tmp.diploma.name')
+											input.form-control(type='text',name='stepDiplomaName',data-ng-model='tmp.diploma.name',placeholder='ex: Master in Computer Sciences')
 									td
 										.btn-group.text-center
 											button.fa.fa-fw.fa-minus.btn.btn-danger(disabled)
 											button.fa.fa-fw.fa-plus.btn.btn-success(data-ng-click='addDiploma(tmp.diploma.year,tmp.diploma.name)')
+					#cv-form-step-experiences
+						h1= 'Fill your experiences'
+						table#cv-form-step-experiences-table.table.table-striped
+							thead
+								tr
+									th.col-md-2= 'Year'
+									th.col-md-7= 'Experience'
+									th.col-md-1= ''
+							tbody
+								tr(data-ng-repeat='experience in cv.experiences')
+									td= '{{experience.year}}'
+									td= '{{experience.name}}'
+									td
+										.btn-group
+											button.fa.fa-fw.fa-minus.btn.btn-danger(data-ng-click='removeExperience($index)')
+											button.fa.fa-fw.fa-plus.btn.btn-success(disabled)
+								tr
+									td
+										.input-group.col-md-12
+											input.form-control(type='number',name='stepExperienceYear',data-ng-model='tmp.experience.year',placeholder='ex: 2012')
+									td
+										.input-group.col-md-12
+											input.form-control(type='text',name='stepExperienceName',data-ng-model='tmp.experience.name',placeholder='ex: Teacher assistance in Paris Sud University')
+									td
+										.btn-group.text-center
+											button.fa.fa-fw.fa-minus.btn.btn-danger(disabled)
+											button.fa.fa-fw.fa-plus.btn.btn-success(data-ng-click='addExperience(tmp.experience.year,tmp.experience.name)')
+					.btn-toolbar.text-right
+						button#cv-form-submit.btn.btn-default(type='button',data-ng-click='saveCV()')
+							i.fa.fa-fw.fa-save
+							span= 'Save CV'
+						button#cv-form-submit.btn.btn-primary(type='button')
+							i.fa.fa-fw.fa-file-pdf-o
+							span= 'Generate PDF'

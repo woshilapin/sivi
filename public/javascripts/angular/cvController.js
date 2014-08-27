@@ -21,10 +21,16 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 			$scope.isCV = false;
 			if(email !== "") {
 				var uri = 'cv/' + email + '/last';
-				$http.get(uri).
+				var getRequest = {
+					method: 'GET',
+					url: uri
+				};
+				$http(getRequest).
 				success(function(data, status, header, config) {
 					if(status === 200) {
 						$scope.isCV = true;
+						delete data._id;
+						delete data._date;
 						cv = data;
 						// Need to explicitly convert date into Date object in javascript
 						cv.birthday = new Date(data.birthday);
@@ -48,7 +54,29 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 				});
 			}
 		};
+		$scope.saveCV = function(next) {
+			var uri = 'cv/' + $scope.email;
+			var postRequest = {
+				method: 'POST',
+				url: uri,
+				data: $scope.cv
+			};
+			$http(postRequest).
+			success(function(data, status, header, config) {
+				if(status === 201) {
+					console.log('CV saved for ' + $scope.email + "'");
+				}
+				callback(next);
+			}).
+			error(function(data, status, header, config) {
+				console.log('Error when saving the CV for ' + $scope.email + "'");
+				callback(next);
+			});
+		};
 		$scope.addDiploma = function(year, name, next) {
+			if($scope.cv.diplomas === undefined) {
+				$scope.cv.diplomas = [];
+			}
 			$scope.cv.diplomas.push({
 					name: name,
 					year: year
@@ -56,11 +84,21 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 			callback(next);
 		};
 		$scope.removeDiploma = function(index, next) {
-			console.log($scope.cv.diplomas);
-			console.log($scope.cv.diplomas.length);
 			$scope.cv.diplomas.splice(index, 1);
-			console.log($scope.cv.diplomas);
-			console.log($scope.cv.diplomas.length);
+			callback(next);
+		};
+		$scope.addExperience = function(year, name, next) {
+			if($scope.cv.experiences === undefined) {
+				$scope.cv.experiences = [];
+			}
+			$scope.cv.experiences.push({
+					name: name,
+					year: year
+			});
+			callback(next);
+		};
+		$scope.removeExperience = function(index, next) {
+			$scope.cv.experiences.splice(index, 1);
 			callback(next);
 		};
 }]);
