@@ -1,5 +1,13 @@
 var cvApp = angular.module('cvApp', []);
 
+// When you have a callback function, pass it as an argument to this 'callback' function.
+// It will check if it's a function before calling it.
+var callback = function(next) {
+	if(typeof(next)=='function') {
+		next();
+	}
+}
+
 cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 		var cv = undefined;
 		$scope.check = {
@@ -21,22 +29,22 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 						// Need to explicitly convert date into Date object in javascript
 						cv.birthday = new Date(data.birthday);
 					}
-					next();
+					callback(next);
 				}).
 				error(function(data, status, header, config) {
 					console.log('The database does not contain any CV for user \`' + email + "'");
-					next();
+					callback(next);
 				});
 			}
 		};
 		$scope.loadCV = function(next) {
 			if($scope.isCV) {
 				$scope.cv = cv;
-				next();
+				callback(next);
 			} else {
 				$scope.checkCV(function() {
 					$scope.cv = cv;
-					next();
+					callback(next);
 				});
 			}
 		};
