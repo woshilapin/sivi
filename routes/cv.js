@@ -66,9 +66,11 @@ router.delete('/:email', function(req, res) {
 // Must be before the route [/:email/:id]
 router.post('/:email/pdf', function(req, res) {
 	var db = req.db;
-	var pdfpath = latex.generate(req.body);
-	var message = {msg: ""};
-	res.status(201).send(message);
+	var pdfpath = latex.generate(req.body, function(pdfpath) {
+		if(pdfpath !== undefined) {
+			res.status(201).sendFile(pdfpath);
+		}
+	});
 });
 
 // Must be before the route [/:email/:id]
