@@ -1,5 +1,7 @@
 var express = require('express');
+var path = require('path');
 var mongo = require('mongoskin');
+var latex = require(path.join(__dirname, '../lib', 'latex-cv.js'));
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -59,6 +61,14 @@ router.delete('/:email', function(req, res) {
 			res.status(403).send(message);
 		}
 	});
+});
+
+// Must be before the route [/:email/:id]
+router.post('/:email/pdf', function(req, res) {
+	var db = req.db;
+	var pdfpath = latex.generate(req.body);
+	var message = {msg: ""};
+	res.status(201).send(message);
 });
 
 // Must be before the route [/:email/:id]
