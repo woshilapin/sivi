@@ -75,7 +75,6 @@ router.get('/:email/pdf', function(req, res) {
 		}
 	};
 	db.collection('cv').findOne(query, function(err, result) {
-		console.log(result);
 		var pdfpath = latex.generate(result, function(pdfpath) {
 			if(pdfpath !== undefined) {
 				res.status(201).set('Content-Type', 'application/pdf').sendFile(pdfpath);
