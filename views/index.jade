@@ -2,7 +2,7 @@ extends layout
 
 block content
 	.container-fluid
-		form#cv-form.form-horizontal.form-group-lg(method='post',name='cvForm',data-ng-controller='cvController')
+		form#cv-form.form-horizontal.form-group-lg(name='cvForm',data-ng-controller='cvController')
 			.row
 				#cv-form-steps
 					#cv-form-step-profile
@@ -128,6 +128,6 @@ block content
 						button#cv-form-submit.btn.btn-default(type='button',data-ng-click='saveCV()')
 							i.fa.fa-fw.fa-save
 							span= 'Save CV'
-						button#cv-form-submit.btn.btn-primary(type='button')
+						button#cv-form-submit.btn.btn-primary(type='button',data-ng-click='generateCV()')
 							i.fa.fa-fw.fa-file-pdf-o
 							span= 'Generate PDF'

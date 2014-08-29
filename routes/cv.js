@@ -64,12 +64,23 @@ router.delete('/:email', function(req, res) {
 });
 
 // Must be before the route [/:email/:id]
-router.post('/:email/pdf', function(req, res) {
+router.get('/:email/pdf', function(req, res) {
 	var db = req.db;
-	var pdfpath = latex.generate(req.body, function(pdfpath) {
-		if(pdfpath !== undefined) {
-			res.status(201).sendFile(pdfpath);
+	var query = {
+		$query: {
+			email: req.params.email
+		},
+		$orderby: {
+			_date: -1
 		}
+	};
+	db.collection('cv').findOne(query, function(err, result) {
+		console.log(result);
+		var pdfpath = latex.generate(result, function(pdfpath) {
+			if(pdfpath !== undefined) {
+				res.status(201).set('Content-Type', 'application/pdf').sendFile(pdfpath);
+			}
+		});
 	});
 });
 

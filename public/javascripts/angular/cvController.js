@@ -3,12 +3,12 @@ var cvApp = angular.module('cvApp', []);
 // When you have a callback function, pass it as an argument to this 'callback' function.
 // It will check if it's a function before calling it.
 var callback = function(next) {
-	if(typeof(next)=='function') {
+	if(next instanceof Function) {
 		next();
 	}
 }
 
-cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
+cvApp.controller('cvController', ['$scope', '$http', '$window', function($scope, $http, $window) {
 		var cv = undefined;
 		$scope.check = {
 			"address": {
@@ -56,6 +56,7 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 		};
 		$scope.saveCV = function(next) {
 			var uri = 'cv/' + $scope.email;
+			$scope.cv.email = $scope.email;
 			var postRequest = {
 				method: 'POST',
 				url: uri,
@@ -71,6 +72,12 @@ cvApp.controller('cvController', ['$scope', '$http', function($scope, $http) {
 			error(function(data, status, header, config) {
 				console.log('Error when saving the CV for ' + $scope.email + "'");
 				callback(next);
+			});
+		};
+		$scope.generateCV = function(next) {
+			$scope.saveCV(function() {
+				var uri = 'cv/' + $scope.email + '/pdf';
+				$window.open(uri);
 			});
 		};
 		$scope.addDiploma = function(year, name, next) {
