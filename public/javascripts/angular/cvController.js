@@ -1,4 +1,4 @@
-var cvApp = angular.module('cvApp', []);
+var siviApp = angular.module('siviApp', []);
 
 // When you have a callback function, pass it as an argument to this 'callback' function.
 // It will check if it's a function before calling it.
@@ -8,7 +8,7 @@ var callback = function(next) {
 	}
 }
 
-cvApp.controller('cvController', ['$scope', '$http', '$window', function($scope, $http, $window) {
+siviApp.controller('cvController', ['$scope', '$http', '$window', function($scope, $http, $window) {
 		var cv = undefined;
 		$scope.check = {
 			"address": {
@@ -109,7 +109,7 @@ cvApp.controller('cvController', ['$scope', '$http', '$window', function($scope,
 			callback(next);
 		};
 }]);
-cvApp.directive('myDate', ['dateFilter', function(dateFilter) {
+siviApp.directive('myDate', ['dateFilter', function(dateFilter) {
 	return {
 		"require": "ngModel",
 		"restrict": "A",
