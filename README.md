@@ -6,9 +6,14 @@ the server side and uses JQuery and Bootstrap for the client side.
 
 # Prerequisite
 
-You need to install MongoDB, NodeJS and LaTeX.
+You need to install MongoDB, NodeJS, NPM and LaTeX.
 
-    $ sudo apt-get install mongodb nodejs texlive texlive-latex-extra
+    $ sudo apt-get install mongodb nodejs npm texlive texlive-latex-extra
+
+On Debian, only `nodejs` executable is provided but `node` is the standard.  You
+may want to create a links.
+
+    $ ln -s /usr/lib/nodejs /usr/lib/node
 
 Then clone the repository
 
