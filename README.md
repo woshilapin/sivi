@@ -33,3 +33,9 @@ Finally, you can run it.
     $ npm start
 
 Your web application is now accessible on http://127.0.0.1:3000/.
+
+# References
+
+2 tutorials helps a lot in the creation of this application:
+* http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/
+* http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/
