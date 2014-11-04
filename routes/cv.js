@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get('/', function(req, res) {
 	var db = req.db;
-	db.collection('cv').find().toArray(function(err, items) {
+	db.collection('sivi').find().toArray(function(err, items) {
 		if(err === null) {
 			res.status(200).json(items);
 		} else {
@@ -23,7 +23,7 @@ router.get('/:email', function(req, res) {
 			email: req.params.email
 		}
 	};
-	db.collection('cv').find(query).toArray(function(err, items) {
+	db.collection('sivi').find(query).toArray(function(err, items) {
 		if(err === null) {
 			res.status(200).json(items);
 		} else {
@@ -36,7 +36,7 @@ router.get('/:email', function(req, res) {
 router.post('/:email', function(req, res) {
 	var db = req.db;
 	req.body._date = new Date();
-	db.collection('cv').insert(req.body, function(err, result) {
+	db.collection('sivi').insert(req.body, function(err, result) {
 		if(err === null) {
 			var message = {msg: ""};
 			res.status(201).send(message);
@@ -52,7 +52,7 @@ router.delete('/:email', function(req, res) {
 	var query = {
 		email: req.params.email
 	};
-	db.collection('cv').remove(query, function(err, result) {
+	db.collection('sivi').remove(query, function(err, result) {
 		if(result === 1) {
 			var message = {msg: ""};
 			res.status(204).send(message);
@@ -74,7 +74,7 @@ router.get('/:email/pdf', function(req, res) {
 			_date: -1
 		}
 	};
-	db.collection('cv').findOne(query, function(err, result) {
+	db.collection('sivi').findOne(query, function(err, result) {
 		var pdfpath = latex.generate(result, function(pdfpath) {
 			if(pdfpath !== undefined) {
 				res.status(201).set('Content-Type', 'application/pdf').sendFile(pdfpath);
@@ -94,7 +94,7 @@ router.get('/:email/last', function(req, res) {
 			_date: -1
 		}
 	};
-	db.collection('cv').findOne(query, function(err, result) {
+	db.collection('sivi').findOne(query, function(err, result) {
 		if(err === null && result != null) {
 			res.status(200).json(result);
 		} else {
@@ -112,7 +112,7 @@ router.get('/:email/:id', function(req, res) {
 			email: req.params.email
 		}
 	};
-	db.collection('cv').findOne(query, function(err, result) {
+	db.collection('sivi').findOne(query, function(err, result) {
 		if(err === null) {
 			res.status(200).json(result);
 		} else {
@@ -129,7 +129,7 @@ router.put('/:email/:id', function(req, res) {
 		email: req.params.email
 	};
 	req.body._date = new Date();
-	db.collection('cv').update(query, req.body, function(err, result) {
+	db.collection('sivi').update(query, req.body, function(err, result) {
 		if(err === null) {
 			var message = {msg: ""};
 			res.status(204).send(message);
@@ -146,7 +146,7 @@ router.delete('/:email/:id', function(req, res) {
 		_id: mongo.helper.toObjectID(req.params.id),
 		email: req.params.email
 	};
-	db.collection('cv').remove(query, function(err, result) {
+	db.collection('sivi').remove(query, function(err, result) {
 		if(result === 1) {
 			var message = {msg: ""};
 			res.status(204).send(message);
